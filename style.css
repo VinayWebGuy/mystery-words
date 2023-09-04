@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,500;1,700;1,900&family=Fira+Sans+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+:root{
+    --clr: #006fb9;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Asap condensed';
+    position: relative;
+}
+.hint {
+    position: fixed;
+    bottom: 3%;
+    right: 3%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #fff;
+    font-weight: 600;
+    background-color: var(--clr);
+    padding: 6px 12px;
+}
+.hint i {
+    margin-left: 6px;
+}
+.logo {
+    font-size: 3.1rem;
+    margin-top: 20px;
+}
+.game{
+    margin-top: 200px;
+}
+.word{
+    font-size: 3.8rem;
+    letter-spacing: 1rem;
+    user-select: none;
+    padding: 0;
+    font-weight: 800;
+    text-align: center;
+}
+.word-input {
+    font-size: 3.8rem;
+    font-family: 'Asap condensed';
+    border: none;
+    border-bottom: 3px solid var(--clr);
+    color: var(--clr);
+    letter-spacing: 1rem;
+    outline: none;
+    padding: 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 800;
+    position: relative;
+    user-select: none;
+    max-width: 50px; 
+    width: auto;
+}
+.hintbar {
+    position: fixed;
+    bottom: 4%;
+    color: gray;
+    font-size: 1.3rem;
+}
+#main-word{
+    position: relative;
+}
+#main-word.jerk {
+    animation: jerk 0.3s ease 3;
+    --clr: #f00;
+}
+#main-word .value {
+    display: none;
+}
+@keyframes jerk {
+    0%{
+        left: 0;
+        right: 0;
+    }
+    20%, 50%, 80% {
+        left: 4px;
+    }
+    30%, 60% {
+        left: 0;
+        right: 0;
+    }
+    40%, 70%, 90% {
+        right: 4px;
+    }
+    100%{
+        left: 0;
+        right: 0;
+    }
+    
+}
