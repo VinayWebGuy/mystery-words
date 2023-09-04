@@ -1,4 +1,4 @@
-let easy = [
+let words = [
     "TITLE",
     "LAPTOP",
     "LIBRARY",
@@ -102,7 +102,7 @@ let easy = [
     
 ];
 
-let easy_hints = [
+let about_words = [
     "A name or heading",
     "Portable computer",
     "Place to borrow books",

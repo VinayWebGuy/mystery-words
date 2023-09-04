@@ -36,12 +36,14 @@ body {
 .game{
     margin-top: 200px;
 }
-.word{
-    font-size: 3.8rem;
-    letter-spacing: 1rem;
+.word .about{
+    color: #000;
+    opacity: 0.8;
     user-select: none;
-    padding: 0;
-    font-weight: 800;
+    font-size: 1.2rem;
+    width: 400px;
+    margin: auto;
+    margin-bottom: 30px;
     text-align: center;
 }
 .word-input {
@@ -69,6 +71,12 @@ body {
 }
 #main-word{
     position: relative;
+    font-size: 3.8rem;
+    letter-spacing: 1rem;
+    user-select: none;
+    padding: 0;
+    font-weight: 800;
+    text-align: center;
 }
 #main-word.jerk {
     animation: jerk 0.3s ease 3;
