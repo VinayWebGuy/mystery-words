@@ -32,9 +32,14 @@ body {
 .logo {
     font-size: 3.1rem;
     margin-top: 20px;
+    color: cornflowerblue;
+    font-weight: 800;
+}
+.logo span {
+    border-bottom: 7px solid cornflowerblue;
 }
 .game{
-    margin-top: 200px;
+    margin-top: 150px;
 }
 .word .about{
     color: #000;
@@ -84,6 +89,15 @@ body {
 }
 #main-word .value {
     display: none;
+}
+.game-actions {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+    font-size: 1.4rem;
+    background-color: cornflowerblue;
+    color: #fff;
 }
 @keyframes jerk {
     0%{

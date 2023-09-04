@@ -4,7 +4,10 @@ let word_to_remove = 2;
 let w1_index = -1;
 let w2_index = -1;
 let filled = 0;
-let hint_times = 1;
+let hint_left = 3;
+let score = 0;
+let start = false;
+let time = 0;
 
 
 function addRandomWord() {
@@ -12,6 +15,7 @@ function addRandomWord() {
     word = words[index];
     findBlankIndex(word)
     $('.about').html(about_words[index]);
+   
 }
 function findBlankIndex(w) {
     if (word_to_remove === 2) {
@@ -32,6 +36,10 @@ function addBlanks(w, w1, w2) {
     inputElements.on('input', function (e) {
         if ($('#main-word').hasClass('jerk')) {
             $('#main-word').removeClass('jerk')
+        }
+        if (!start) {
+            start = true;
+            updateTime();
         }
         let input_id = $(this).attr('input-id');
         $(`#value-${input_id}`).html((this.value).toUpperCase());
@@ -58,7 +66,16 @@ function addBlanks(w, w1, w2) {
     console.log(word);
 }
 $('.hint').on('click', function () {
-    $('.hintbar').html(word)
+    if($('.hintbar').html()=='') {
+        hint_left--;
+    }
+    if(hint_left > 0) {
+        $('.hintbar').html(word)
+    }
+    else {
+        $('.hintbar').html("No hint left!");
+    }
+    renderHint();
 });
 
 function check() {
@@ -67,6 +84,8 @@ function check() {
         addRandomWord()
         removeWord();
         reset();
+        score++;
+        renderScore();
     }
     else {
         $('#main-word').addClass('jerk')
@@ -79,8 +98,24 @@ function removeWord() {
 function reset() {
     filled = 0;
     $('.hintbar').html('')
-    hint_times = 1;
     w1_index = -1;
     w2_index = -1;
+}
+function renderHint() {
+    $('#hints').html(hint_left)
+}
+function renderScore() {
+    $('#score').html(score)
+}
+function updateTime() {
+    let timeInterval = setInterval(() => {
+        if (start) {
+            $('#time').html(time);
+            time++;
+        }
+        else {
+            clearInterval(timeInterval);
+        }
+    }, 1000);
 }
 addRandomWord();
