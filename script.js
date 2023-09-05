@@ -1,4 +1,4 @@
-let type = "";
+let index = -1;
 let word = "";
 let word_to_remove = 2;
 let w1_index = -1;
@@ -9,14 +9,15 @@ let score = 0;
 let start = false;
 let time = 0;
 
-
 function addRandomWord() {
     index = Math.floor(Math.random() * words.length);
-    word = words[index];
-    findBlankIndex(word)
-    $('.about').html(about_words[index]);
-   
+    word = words[index].word;
+    findBlankIndex(word);
+    $('.about').html(words[index].about_word);
+    console.log("Random" + time)
+
 }
+
 function findBlankIndex(w) {
     if (word_to_remove === 2) {
         while (w1_index === w2_index || w1_index === -1 || w2_index === -1) {
@@ -25,7 +26,9 @@ function findBlankIndex(w) {
         }
         addBlanks(w, w1_index, w2_index);
     }
+    console.log("Find Blank" + time)
 }
+
 function addBlanks(w, w1, w2) {
     let chars = w.split('');
     chars[w1] = '<input type="text" class="word-input" input-id="1" maxlength="1"><span id="value-1" class="value"></span>';
@@ -34,12 +37,12 @@ function addBlanks(w, w1, w2) {
     $('#main-word').html(w);
     const inputElements = $('#main-word').find('input.word-input');
     inputElements.on('input', function (e) {
-        if ($('#main-word').hasClass('jerk')) {
-            $('#main-word').removeClass('jerk')
-        }
         if (!start) {
             start = true;
             updateTime();
+        }
+        if ($('#main-word').hasClass('jerk')) {
+            $('#main-word').removeClass('jerk')
         }
         let input_id = $(this).attr('input-id');
         $(`#value-${input_id}`).html((this.value).toUpperCase());
@@ -63,50 +66,62 @@ function addBlanks(w, w1, w2) {
             inputElements.eq(0).focus();
         }
     });
-    console.log(word);
+    console.log("Add" + time)
 }
+
 $('.hint').on('click', function () {
-    if($('.hintbar').html()=='') {
+    if ($('.hintbar').html() == '') {
         hint_left--;
     }
-    if(hint_left > 0) {
-        $('.hintbar').html(word)
+    if (hint_left >= 0) {
+        $('.hintbar').html(words[index].word)
+        renderHint();
     }
     else {
         $('.hintbar').html("No hint left!");
     }
-    renderHint();
+    
 });
 
 function check() {
+    console.log("Check" + time)
     let attempted = $('#main-word').text();
     if (attempted == word) {
-        addRandomWord()
         removeWord();
         reset();
         score++;
         renderScore();
+        if (words.length == 0 || score > 100 || time > 300) {
+            gameOver();
+        }
+        else {
+            addRandomWord();
+        }
     }
     else {
         $('#main-word').addClass('jerk')
     }
 }
+
 function removeWord() {
     words.splice(index, 1)
-    about_words.splice(index, 1)
 }
+
 function reset() {
     filled = 0;
     $('.hintbar').html('')
     w1_index = -1;
     w2_index = -1;
 }
+
 function renderHint() {
     $('#hints').html(hint_left)
 }
+
 function renderScore() {
     $('#score').html(score)
 }
+
 function updateTime() {
     let timeInterval = setInterval(() => {
         if (start) {
@@ -118,4 +133,20 @@ function updateTime() {
         }
     }, 1000);
 }
+function gameOver() {
+    updateTime();
+    start = false;
+    emptyTimer();
+    $('.main').addClass('off')
+    $('.results').addClass('show')
+    $('#score_result').html(score)
+    $('#time_result').html(time)
+}
+function emptyTimer() {
+    $('#time').html('0')
+}
+$('#restart').click(function () {
+    window.location.reload()
+})
+
 addRandomWord();
